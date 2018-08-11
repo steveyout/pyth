@@ -1,0 +1,68 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Log in</title>
+        <meta name="description" content="Dashboard UI Kit">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600" rel="stylesheet">
+
+{#        <!-- Favicon -->#}
+{#        <link rel="apple-touch-icon" href="apple-touch-icon.png">#}
+{#        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">#}
+
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="{% static 'main.css' %}">
+    </head>
+    <body class="c-login-wrapper">
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+        <div class="c-login">
+            <header class="c-login__head">
+                <a class="c-login__brand" href="#!">
+                    <img src="{% static 'logo.png' %}" alt="Dashboard's Logo">
+                </a>
+                <h1 class="c-login__title">Welcome back! Please login.</h1>
+            </header>
+            
+            <form class="c-login__content" method="post">
+                {% csrf_token %}
+                <div class="error">
+            {{ form.non_field_errors }}
+        </div>
+                <div class="c-field u-mb-small">
+                    <label class="c-field__label" for="input1">Sign in with your username</label>
+                    <input class="c-input" type="username" id="input1" name="username" placeholder="clark@dashboard.com">
+                </div>
+
+                <div class="c-field u-mb-small">
+                    <label class="c-field__label" for="input2">Password</label> 
+                    <input class="c-input" type="password" name="password" id="input2" placeholder="Numbers, Letters...">
+                </div>
+
+                <button class="c-btn c-btn--info c-btn--fullwidth" type="submit">Sign in to Dashboard</button>
+
+            </form>
+
+            <footer class="c-login__footer">
+                <a class="c-login__footer-link u-right" href="{% url 'password_reset' %}">Forgot Password?</a>
+            </footer>
+        </div>
+
+        
+
+        <script src="{% static 'main.js' %}"></script>
+
+        <script>
+            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+            ga('create','UA-88739867-2','auto');ga('send','pageview')
+        </script>
+{#        <script src="https://www.google-analytics.com/analytics.js" async defer></script>#}
+    </body>
+</html>

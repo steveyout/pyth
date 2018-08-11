@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="c-card c-card--responsive u-mb-medium">
+                <div class="c-field has-icon-right">
+                    <form method="get">
+                        <input class="c-input" type="text" name="id" placeholder="Искать по ID пользователя">
+                        <input type="submit" value="Искать по ID">
+                    </form>
+                </div>
+                    <div class="c-card__head">
+                        <h5 class="c-card__title">Users</h5>
+                    </div>
+
+                    <table class="c-table u-border-zero">
+                        <thead>
+                        <tr>
+                            <th class="c-table__cell u-text-mute">ID</th>
+                            <th class="c-table__cell">Телефон</th>
+                            <th class="c-table__cell">Рефер</th>
+                            <th class="c-table__cell">Инвестировано</th>
+                            <th class="c-table__cell">Накоплено</th>
+                            <th class="c-table__cell">Выплачено</th>
+                            <th class="c-table__cell">Остаток</th>
+                            <th class="c-table__cell">Время оплаты</th>
+                            <th class="c-table__cell">Кошелек</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr class="c-table__row">
+                                <td class="c-table__cell u-text-mute">{{ user.id }}</td>
+                                <td class="c-table__cell">{{ user.phone }}</td>
+                                <td class="c-table__cell">{{ user.ref_user_id }}</td>
+                                <td class="c-table__cell">{{ user.rub_invested_sum|floatformat:2 }}₽/{{ user.dol_invested_sum|floatformat:2 }}$</td>
+                                <td class="c-table__cell">{{ user.rub_accumulated_sum|floatformat:2 }}₽/{{ user.dol_accumulated_sum|floatformat:2 }}$</td>
+                                <td class="c-table__cell">{{ user.rub_payed_outcome|floatformat:2 }}₽/{{ user.dol_payed_outcome|floatformat:2 }}$</td>
+                                <td class="c-table__cell">{{ user.rub_remind_outcome|floatformat:2 }}₽/{{ user.dol_remind_outcome|floatformat:2 }}$</td>
+                                <td class="c-table__cell">{{ user.pay_time }}</td>
+                                <td class="c-table__cell">{{ user.payeer }}</td>
+
+                                <td class="c-table__cell u-text-right">
+                                    <a href="{% url 'user_edit' user.id %}"><span
+                                            class="c-badge c-badge--small c-badge--warning">Edit</span></a>
+                                </td>
+                                <td class="c-table__cell u-text-right">
+                                    <a href="{% url 'get_payeer' user.id %}"><span
+                                            class="c-badge c-badge--small c-badge--warning">Запросить номер</span></a>
+                                </td>
+                                <td class="c-table__cell u-text-right">
+                                    <a href="{% url 'notify' user.id %}"><span
+                                            class="c-badge c-badge--small c-badge--success">Уведомить о выплате</span></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div><!-- // .container -->
+{% endblock %}
